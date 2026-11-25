@@ -83,7 +83,7 @@ const memoryStore = () => {
   };
 };
 
-const store = process.env.MEMORY_STORE ? memoryStore() : await firestoreStore();
+const store = process.env.MEMORY_STORE === "1" ? memoryStore() : await firestoreStore();
 
 /* ---------- Reglas del sorteo ---------- */
 
