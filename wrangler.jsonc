@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "intercambio-2026",
+  "main": "src/worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "DRAW", "class_name": "Draw" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Draw"] }],
+  "observability": { "enabled": true }
+}
