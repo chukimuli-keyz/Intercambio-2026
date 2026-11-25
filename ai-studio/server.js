@@ -67,23 +67,7 @@ const firestoreStore = async () => {
   };
 };
 
-// En memoria, solo para probar en tu computadora (MEMORY_STORE=1).
-const memoryStore = () => {
-  const m = new Map();
-  const clone = (v) => (v ? structuredClone(v) : null);
-  return {
-    async get(id) { return clone(m.get(id)); },
-    async create(id, data) { if (m.has(id)) throw new Error("exists"); m.set(id, clone(data)); },
-    async change(id, fn) {
-      const { save, result } = fn(clone(m.get(id)));
-      if (save) m.set(id, clone(save));
-      return result;
-    },
-    async remove(id) { m.delete(id); },
-  };
-};
-
-const store = process.env.MEMORY_STORE === "1" ? memoryStore() : await firestoreStore();
+const store = await firestoreStore();
 
 /* ---------- Reglas del sorteo ---------- */
 
